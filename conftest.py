@@ -39,30 +39,25 @@ def scooter_color(request):
 def create_order(order_data, scooter_color):
     order_data_copy = order_data.copy()
     order_data_copy['color'] = scooter_color
-
     order_response = requests.post(f'{Url.MAIN_URL}{Url.CREATE_ORDER}', json=order_data_copy)
-
-    assert order_response.status_code == 201, f"Ошибка создания заказа: {order_response.text}"
-    assert Flags.SUCCESSFUL_ORDER_CREATION in order_response.json(), "Не найден флаг успешного создания"
-
+    assert order_response.status_code == 201
+    assert Flags.SUCCESSFUL_ORDER_CREATION in order_response.json()
     return order_response.json()
 
 @pytest.fixture
 def create_and_cancel_order(create_order):
     order_track = create_order['track']
-
     yield order_track
-
     try:
         cancel_response = requests.put(f'{Url.MAIN_URL}{Url.ORDER_CANCEL}{order_track}')
         if cancel_response.status_code == 200:
-            print(f"✓ Заказ {order_track} успешно отменен")
+            print(f"Заказ {order_track} успешно отменен")
         else:
-            print(f"⚠ Ошибка отмены заказа {order_track}: {cancel_response.status_code}")
+            print(f"Ошибка отмены заказа {order_track}: {cancel_response.status_code}")
     except requests.exceptions.RequestException as e:
-        print(f"✗ Ошибка сети при отмене заказа {order_track}: {e}")
+        print(f"Ошибка сети при отмене заказа {order_track}: {e}")
     except Exception as e:
-        print(f"✗ Неожиданная ошибка при отмене заказа {order_track}: {e}")
+        print(f"Неожиданная ошибка при отмене заказа {order_track}: {e}")
 
 @pytest.fixture
 def order_track(create_order):
