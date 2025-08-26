@@ -1,27 +1,15 @@
 import generators
 
-
-class Url:
-    MAIN_URL = 'https://qa-scooter.praktikum-services.ru/'
-    CREATE_COURIER = '/api/v1/courier'
-    COURIER_LOGIN = '/api/v1/courier/login'
-    COURIER_DELETE = '/api/v1/courier/:id'
-    CREATE_ORDER = '/api/v1/orders'
-    GET_ORDER_LIST = '/api/v1/orders'
-    ORDER_CANCEL = '/api/v1/orders/cancel'
-    TRACK_ORDER = '/api/v1/orders?track?t='
-
-
 class DataForOrder:
     order_data = {
-        "firstName": "РРІР°РЅ",
-        "lastName": "РРІР°РЅРѕРІ",
-        "address": "Р РѕР¶РґРµСЃС‚РІРµРЅРєР° 5",
+        "firstName": "Иван",
+        "lastName": "Иванов",
+        "address": "Театральный проезд, 5",
         "metroStation": 2,
         "phone": "89879998888",
         "rentTime": 3,
         "deliveryDate": "2025-07-19",
-        "comment": "РЎРїР°СЃРёР±Рѕ"
+        "comment": "Позвоните перед доставкой"
     }
 
     scooter_color = [['BLACK'], ['GREY'], (['BLACK'], ['GREY']), ['']]
